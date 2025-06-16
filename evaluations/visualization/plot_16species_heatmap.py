@@ -88,7 +88,7 @@ plt.rcParams.update({
 
 # ================== Single heatmap generation function ==================
 def generate_single_heatmap(model_name, data, output_path):
-    """生成并保存单个模型的热图"""
+    """Generate and save heatmaps of individual models"""
     fig = plt.figure(figsize=(36, 24))
     ax = fig.add_subplot(111)
     
@@ -133,7 +133,7 @@ def generate_single_heatmap(model_name, data, output_path):
     for label in ax.get_yticklabels():
         species = label.get_text()
         label.set_color(palette[species_classification[species]])
-        label.set_fontsize(40)  # Y轴刻度字体大小
+        label.set_fontsize(40)  
         label.set_weight('bold')
 
     ax.set_xticklabels(
@@ -141,16 +141,16 @@ def generate_single_heatmap(model_name, data, output_path):
         rotation=45,
         ha='right',
         rotation_mode='anchor',
-        fontsize=40,  # X轴刻度字体大小
+        fontsize=40, 
         weight='bold'
     )
 
     cbar = heatmap.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=30)  # 颜色条刻度字体
+    cbar.ax.tick_params(labelsize=30)  
     cbar.set_label(
         label='Accuracy',
         rotation=90,
-        size=40,  # 颜色条标签字体
+        size=40,  
         weight='bold',
         labelpad=25
     )
@@ -164,11 +164,11 @@ def generate_single_heatmap(model_name, data, output_path):
     
     plt.savefig(output_path, dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
-    print(f"生成文件: {output_path}")
+    print(f"The generated file: {output_path}")
 
 # ================== Legend generation function ==================
 def generate_legend(output_path):
-    """单独生成分类图例"""
+    """Generate separate classification legends"""
     fig = plt.figure(figsize=(8, 1))
     ax = fig.add_subplot(111)
     ax.axis('off')
@@ -190,7 +190,7 @@ def generate_legend(output_path):
     
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"生成图例文件: {output_path}")
+    print(f"The generated legend: {output_path}")
 
 # ================== Main execution logic ==================
 if __name__ == "__main__":
@@ -202,4 +202,4 @@ if __name__ == "__main__":
 
     generate_legend(f"{output_dir}/Species_Category_Legend.png")
     
-    print("\n所有热图生成完成，保存路径:", output_dir)
+    print("\nAll heat maps have been generated, save path:", output_dir)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib.colors import LinearSegmentedColormap
 
-# ================== 配置参数 ==================
+# ================== configuration parameter ==================
 species_classification = {
     "A.thaliana": "Plant",
     "A.thaliana2": "Plant",
@@ -39,9 +39,9 @@ model_config = [
     ])
 ]
 
-# ================== 数据预处理 ==================
+# ================== Data preprocessing ==================
 def clean_species_names(df):
-    """统一处理行列名称"""
+    """Unified processing of row and column names"""
     df.columns = [col.replace('4mC_', '') for col in df.columns.astype(str)]
     df.index = df.index.astype(str).str.replace('4mC_', '')
     return df
@@ -66,7 +66,7 @@ def load_combined_data(paths):
 
 processed_data = {model: load_combined_data(paths) for model, paths in model_config}
 
-# ================== 可视化参数 ==================
+# ================== Visualization parameters ==================
 colors = ["#FFDEDE", "#FF6B6B", "#C70000"]
 cmap_reds = LinearSegmentedColormap.from_list("custom_reds", colors, N=256)
 
@@ -78,18 +78,18 @@ palette = {
 
 plt.rcParams.update({
     'font.family': 'sans-serif',
-    'font.size': 14,  # 基础字体大小（影响图例）
-    'axes.titlesize': 24,  # 标题字体（已删除）
-    'axes.labelsize': 18,  # 坐标轴标签
-    'xtick.labelsize': 18,  # X轴刻度
-    'ytick.labelsize': 18,  # Y轴刻度
+    'font.size': 14,  
+    'axes.titlesize': 24,  
+    'axes.labelsize': 18,  
+    'xtick.labelsize': 18,  
+    'ytick.labelsize': 18,  
     'pdf.fonttype': 42
 })
 
-# ================== 单个热图生成函数 ==================
+# ================== Single heatmap generation function ==================
 def generate_single_heatmap(model_name, data, output_path):
-    """生成并保存单个模型的热图"""
-    fig = plt.figure(figsize=(36, 24))  # 宽度增加60%，高度增加70%
+    """Generate and save heatmaps of individual models"""
+    fig = plt.figure(figsize=(36, 24)) 
     ax = fig.add_subplot(111)
     
     plot_data = data.drop(columns=['Category']).astype(float)
@@ -100,9 +100,9 @@ def generate_single_heatmap(model_name, data, output_path):
         annot=True,
         fmt=".3f",
         annot_kws={
-            "size": 28,  # 热图数值字体大小
+            "size": 28,  
             "weight": "bold",
-            "color": "black"  # 修改1：数值颜色改为黑色
+            "color": "black"  
         },
         cbar_kws={
             'label': 'Accuracy',
@@ -117,49 +117,49 @@ def generate_single_heatmap(model_name, data, output_path):
         vmax=1.0
     )
     
-    # 设置坐标轴标签（修改2：删除标题）
+    # Set axis labels
     ax.set_xlabel(
         "Feature Encoding Methods",
         labelpad=15,
-        fontsize=50,  # X轴标签字体大小
+        fontsize=50,
         fontweight='bold'
     )
     ax.set_ylabel(
         "Species",
         labelpad=20,
-        fontsize=50,  # Y轴标签字体大小
+        fontsize=50,
         fontweight='bold'
     )
     
-    # Y轴标签样式
+    # Y-axis label style
     for label in ax.get_yticklabels():
         species = label.get_text()
         label.set_color(palette[species_classification[species]])
-        label.set_fontsize(40)  # Y轴刻度字体大小
+        label.set_fontsize(40)  
         label.set_weight('bold')
     
-    # X轴标签样式
+    # X-axis label style
     ax.set_xticklabels(
         ax.get_xticklabels(),
         rotation=45,
         ha='right',
         rotation_mode='anchor',
-        fontsize=40,  # X轴刻度字体大小
+        fontsize=40,  
         weight='bold'
     )
     
-    # 颜色条设置
+    # Colorbar settings
     cbar = heatmap.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=30)  # 颜色条刻度字体
+    cbar.ax.tick_params(labelsize=30) 
     cbar.set_label(
         label='Accuracy',
         rotation=90,
-        size=40,  # 颜色条标签字体
+        size=40, 
         weight='bold',
         labelpad=25
     )
     
-    # 调整布局参数
+    # Adjust layout parameters
     plt.subplots_adjust(
         top=0.88,
         bottom=0.18,
@@ -169,47 +169,44 @@ def generate_single_heatmap(model_name, data, output_path):
     
     plt.savefig(output_path, dpi=300, bbox_inches='tight', transparent=True)
     plt.close()
-    print(f"生成文件: {output_path}")
+    print(f"Generate files: {output_path}")
 
-# ================== 图例生成函数 ==================
+# ================== Legend generation function ==================
 def generate_legend(output_path):
-    """单独生成分类图例"""
+
     fig = plt.figure(figsize=(8, 1))
     ax = fig.add_subplot(111)
     ax.axis('off')
     
-    # 创建图例元素
     legend_elements = [Patch(facecolor=v, edgecolor=v, label=k) for k,v in palette.items()]
     
-    # 绘制图例（保持原始设置）
     leg = fig.legend(
         handles=legend_elements,
         loc='center',
         ncol=3,
         frameon=False,
-        fontsize=30,  # 图例文本大小
+        fontsize=30,  
         handletextpad=0.5,
         columnspacing=1.2,
         borderaxespad=0.5
     )
     
-    # 调整布局
     plt.subplots_adjust(left=0.05, right=0.95, top=0.8, bottom=0.2)
     
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"生成图例文件: {output_path}")
+    print(f"Generate legend file: {output_path}")
 
-# ================== 主执行逻辑 ==================
+# ================== Main execution logic ==================
 if __name__ == "__main__":
     output_dir = "/home/zqzhangshuyu/Projs/EnDeep4mC-V2/evaluations/acc_heatmap"
     
-    # 生成所有热图
+    # Generate all heatmaps
     for model_name, data in processed_data.items():
         output_path = f"{output_dir}/{model_name}_Final_Heatmap.pdf"
         generate_single_heatmap(model_name, data, output_path)
     
-    # 单独生成图例（修改3）
+    # Generate legends separately
     generate_legend(f"{output_dir}/Species_Category_Legend.png")
     
-    print("\n所有热图生成完成，保存路径:", output_dir)
+    print("\nAll heat maps have been generated, save path:", output_dir)

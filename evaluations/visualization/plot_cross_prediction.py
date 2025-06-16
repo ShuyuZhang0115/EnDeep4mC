@@ -14,7 +14,6 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ================== Dataset name formatting ==================
 def clean_dataset_names(df):
-    """去除'4mC_'前缀并格式化索引"""
     df.columns = df.columns.str.replace('4mC_', '')
     df.index = df.index.str.replace('4mC_', '')
     return df
@@ -123,16 +122,16 @@ def generate_enhanced_heatmap(matrix_path, metric_name):
     draw_category_lines()
 
     cbar = ax.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=40)  # 颜色条刻度字号
-    cbar.set_label(label=metric_name, size=60, weight='bold', family='sans-serif')  # 颜色条标题字号
+    cbar.ax.tick_params(labelsize=40)  
+    cbar.set_label(label=metric_name, size=60, weight='bold', family='sans-serif')  
 
     png_path = os.path.join(OUTPUT_DIR, f'{metric_name.lower()}_heatmap.png')
     plt.savefig(png_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"生成文件: {png_path}")
+    print(f"Generate file: {png_path}")
 
 # ================== Main execution logic ==================
 if __name__ == "__main__":
     generate_enhanced_heatmap(ACC_CSV_PATH, "ACC")
     generate_enhanced_heatmap(AUC_CSV_PATH, "AUC")
-    print("\n所有热图生成完成，保存路径:", os.path.abspath(OUTPUT_DIR))
+    print("\nAll heat maps have been generated, save path:", os.path.abspath(OUTPUT_DIR))

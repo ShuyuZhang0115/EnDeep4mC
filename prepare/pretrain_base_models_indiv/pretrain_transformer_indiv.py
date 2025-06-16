@@ -72,7 +72,7 @@ def train_transformer_model(model_instance, X_train, X_val, X_test, y_train, y_v
     class_weights = compute_class_weight('balanced', classes=classes, y=y_train)
     class_weight = {i: w for i, w in enumerate(class_weights)}
 
-    model_path = f'/your_path/EnDeep4mC/pretrained_models/indiv_cross_species/transformer_{dataset_name}.h5'
+    model_path = f'/your_path/EnDeep4mC/pretrained_models/indiv/transformer_{dataset_name}.h5'
     callbacks = [
         tf.keras.callbacks.EarlyStopping(
             monitor='val_accuracy',
