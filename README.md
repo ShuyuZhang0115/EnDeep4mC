@@ -12,11 +12,12 @@ Evaluation results of various experiments.
 3) acc_heatmap: Accuracy results of 6 species trained on the base model (represented by heatmaps).
 4) acc_matrix: Accuracy results of 6 species trained on the base model.
 5) acc_matrix_extra: Accuracy results of 10 supplementary species trained on the base model.
-6) cross_predict: Results of cross-species prediction experiments.
-7) feature_compare: Performance comparison of EnDeep4mC before and after feature selection.
-8) kmer_analysis: Design and Results of kmer spectrum analysis experiment for eukaryotes/prokaryotes.
-8) visualization: Visualizing the above experimental results.
-9) workflow_plot: Some images in overall workflow.
+6) cross_predict: Results of cross-species prediction experiment.
+7) encoding_methods_performance: Prediction performance on independent test sets of all 16 species after encoding by 14 feature encoding methods respectively.
+8) feature_compare: Performance comparison of EnDeep4mC before and after feature selection.
+9) kmer_analysis: Design and Results of kmer spectrum analysis experiment for eukaryotes/prokaryotes.
+10) visualization: Visualizing the above experimental results.
+11) workflow_plot: Some images in overall workflow.
 
 ## feature_engineering
 The feature engineering module, which can be transferred to the feature selection & encoding process of other deep learning models.
