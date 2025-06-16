@@ -14,8 +14,9 @@ Evaluation results of various experiments.
 5) acc_matrix_extra: Accuracy results of 10 supplementary species trained on the base model.
 6) cross_predict: Results of cross-species prediction experiments.
 7) feature_compare: Performance comparison of EnDeep4mC before and after feature selection.
-8) visualization: Code related to visualizing experimental data.
-9) workflow_plot: Images related to the workflow.
+8) kmer_analysis: Design and Results of kmer spectrum analysis experiment for eukaryotes/prokaryotes.
+8) visualization: Visualizing the above experimental results.
+9) workflow_plot: Some images in overall workflow.
 
 ## feature_engineering
 The feature engineering module, which can be transferred to the feature selection & encoding process of other deep learning models.
