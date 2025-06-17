@@ -32,6 +32,9 @@ The feature engineering module, which can be transferred to the feature selectio
 9) ifs_result: Stores the results of running ifs_on_base_models.py.
 10) ifs_result_extra_species: Stores the results of running ifs_on_base_models_extra.py.
 
+## log
+Log files of main experiments.
+
 ## fs
 Contains detailed definitions of several feature encoding methods from the biological tool iLearn. We mainly referenced the definitions of 14 candidate feature encoding methods from the open-source code of EnDeep4mC mentioned above.
 
